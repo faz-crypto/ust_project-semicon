@@ -1,19 +1,10 @@
-"""
-cad_file.py
-Core geometric math engine using CadQuery.
-Handles validation and step file generation.
-"""
+import os
 import cadquery as cq
 
 def generate_spacer_step(outer_diameter: float, inner_diameter: float, height: float) -> str:
-    """Generates a hollow cylindrical spacer and saves it with a dynamic filename."""
-    # 1. Validation (Catch bad math before it crashes the engine)
-    if inner_diameter >= outer_diameter:
-        raise ValueError("Geometry Error: Inner diameter must be smaller than outer diameter.")
-    if height <= 0:
-        raise ValueError("Geometry Error: Height must be greater than 0.")
-
-    # 2. Geometric Math (CadQuery)
+    """Generates a hollow cylindrical spacer and saves it using its dimensions."""
+    
+    # 1. Generate the CadQuery geometry
     result = (
         cq.Workplane("XY")
         .circle(outer_diameter / 2.0)
@@ -21,46 +12,41 @@ def generate_spacer_step(outer_diameter: float, inner_diameter: float, height: f
         .extrude(height)
     )
     
-    # 3. Dynamic File Naming & Export
-    filename = f"spacer_OD{outer_diameter}_ID{inner_diameter}_H{height}.step"
-    cq.exporters.export(result, filename)
+    # 2. Ensure the samples directory exists
+    output_dir = "samples"
+    os.makedirs(output_dir, exist_ok=True)
     
-    return filename
-
+    # 3. Create a filename using only the dimensions
+    filename = f"spacer_od{outer_diameter}_id{inner_diameter}_h{height}.step"
+    filepath = os.path.join(output_dir, filename)
+    
+    # 4. Export natively to that path
+    cq.exporters.export(result, filepath)
+    
+    return filepath
 
 def generate_plate_step(length: float, width: float, thickness: float, hole_diameter: float) -> str:
-    """Generates a rectangular base plate with 4 corner holes and saves it with a dynamic filename."""
-    # 1. Validation
-    if thickness <= 0 or length <= 0 or width <= 0:
-        raise ValueError("Geometry Error: Dimensions must be greater than 0.")
-    if hole_diameter >= min(length, width) / 2:
-        raise ValueError("Geometry Error: Hole diameter is too large for the plate dimensions.")
-
-    # 2. Geometric Math (Base Plate)
-    result = cq.Workplane("XY").box(length, width, thickness)
+    """Generates a rectangular plate and saves it using its dimensions."""
     
-    # 3. Geometric Math (Calculate corner hole positions)
-    margin = hole_diameter + 2  # Keep holes 2mm away from the edge
-    x_offset = (length / 2) - margin
-    y_offset = (width / 2) - margin
+    # 1. Generate the CadQuery geometry
+    result = (
+        cq.Workplane("XY")
+        .box(length, width, thickness)
+        .faces(">Z").workplane()
+        .rect(length - (hole_diameter * 2.5), width - (hole_diameter * 2.5), forConstruction=True)
+        .vertices()
+        .hole(hole_diameter)
+    )
     
-    # Ensure the plate isn't too small for the margin
-    if x_offset <= 0 or y_offset <= 0:
-        x_offset = length / 4
-        y_offset = width / 4
-
-    pts = [
-        (x_offset, y_offset),
-        (x_offset, -y_offset),
-        (-x_offset, y_offset),
-        (-x_offset, -y_offset)
-    ]
+    # 2. Ensure the samples directory exists
+    output_dir = "samples"
+    os.makedirs(output_dir, exist_ok=True)
     
-    # Cut the holes through the Z face
-    result = result.faces(">Z").workplane().pushPoints(pts).hole(hole_diameter)
+    # 3. Create a filename using only the dimensions
+    filename = f"plate_{length}x{width}_t{thickness}_hole{hole_diameter}.step"
+    filepath = os.path.join(output_dir, filename)
     
-    # 4. Dynamic File Naming & Export
-    filename = f"plate_{length}x{width}_thick{thickness}.step"
-    cq.exporters.export(result, filename)
+    # 4. Export natively to that path
+    cq.exporters.export(result, filepath)
     
-    return filename
+    return filepath
