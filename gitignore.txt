@@ -1,0 +1,45 @@
+# =========================
+# Python Cache & Bytecode
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# =========================
+# Virtual Environments
+# =========================
+# This is the most critical section. It stops the massive 111MB+ 
+# library files (like CadQuery) from trying to upload to GitHub.
+venv/
+env/
+.env
+Include/
+Lib/
+Scripts/
+pyvenv.cfg
+
+# =========================
+# IDE & Editor Folders
+# =========================
+.vscode/
+.idea/
+*.swp
+
+# =========================
+# OS Generated Files
+# =========================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# =========================
+# Optional: Generated CAD Files
+# =========================
+# If you want Git to ignore all loose .step files in your main folder
+# (but keep the ones you manually move into your 'samples' folder):
+*.step
+!samples/*.step
