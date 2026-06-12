@@ -23,9 +23,12 @@ Ensure you have Python installed, along with the required libraries.
 *Note: If you are using a virtual environment, ensure it is activated before installing dependencies.*
 
 ```bash
-`pip install mcp cadquery`
-
+pip install mcp
+pip install cadquery
+```
+Run the mcp server using nodejs
 ```bash
-`pip install mcp cadquery`
+npx -y @modelcontextprotocol/inspector python mcp_server.py
+```
 
 
