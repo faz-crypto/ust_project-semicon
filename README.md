@@ -23,4 +23,9 @@ Ensure you have Python installed, along with the required libraries.
 *Note: If you are using a virtual environment, ensure it is activated before installing dependencies.*
 
 ```bash
-pip install mcp cadquery
+`pip install mcp cadquery`
+
+```bash
+`pip install mcp cadquery`
+
+
