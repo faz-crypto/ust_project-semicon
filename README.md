@@ -35,9 +35,9 @@ Run the mcp server using nodejs
 npx -y @modelcontextprotocol/inspector python mcp_server.py
 ```
 1. once mcp server opens go to tools --> list tools 
-2. choose the shape and enter the dimensions and run
-3. A step file and svg fiel is generated if successful.
-4. these file can files can be further cross checked with tool like mcponlineserver.com
+2. choose the shape, enter the dimensions and run
+3. A step file and svg file is generated if successful.
+4. These  files can be further cvisually viewed  with tool like 3dvieweroline.com
 
 
 
