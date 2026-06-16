@@ -19,16 +19,25 @@ The project is split into three core modules to ensure clean separation of conce
 
 ## Setup & Installation
 
-Ensure you have Python installed, along with the required libraries. 
+Ensure you have Python(version 3.12 or below) installed, along with the required libraries. 
 *Note: If you are using a virtual environment, ensure it is activated before installing dependencies.*
 
 ```bash
 pip install mcp
 pip install cadquery
 ```
+
+chek the versions in requirements
+
 Run the mcp server using nodejs
+
 ```bash
 npx -y @modelcontextprotocol/inspector python mcp_server.py
 ```
+1. once mcp server opens go to tools --> list tools 
+2. choose the shape and enter the dimensions and run
+3. A step file and svg fiel is generated if successful.
+4. these file can files can be further cross checked with tool like mcponlineserver.com
+
 
 
