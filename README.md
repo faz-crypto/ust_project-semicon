@@ -19,7 +19,7 @@ The project is split into three core modules to ensure clean separation of conce
 
 ## Setup & Installation
 
-Ensure you have Python(version 3.12 or below) and nodejs(version 20.12.2)  installed, along with the required libraries. 
+Ensure you have Python (version 3.12 or below) and nodejs (version 20.12.2)  installed, along with the required libraries. 
 *Note: If you are using a virtual environment, ensure it is activated before installing dependencies.*
 
 ```bash
