@@ -38,7 +38,7 @@ npx -y @modelcontextprotocol/inspector python mcp_server.py
 2. After mcp server connects go to tools --> list tools 
 3. choose the shape, enter the dimensions and run
 4. A step file and svg file in the samples folder generated if successful.
-5. These  files can be further visually viewed  with tool like 3dvieweroline.net
+5. These  files can be further visually viewed  with tool like 3dviewer.net
 
 
 
